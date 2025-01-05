@@ -114,40 +114,42 @@ document.addEventListener("DOMContentLoaded", function () {
     currentIndex = (currentIndex + 1) % totalItems;
     updateCarousel();
   }, 6000);
-
   updateCarousel();
+
 
   const ServicesBottomCard = document.querySelector(".services_bottom--card");
   const ShowMoreBtnService = document.querySelector(".showmore_btn--service");
 
   window.addEventListener("resize", function () {
-    const windowWidth = window.innerWidth; // Get the updated window width
+    const windowWidth = window.innerWidth;
     if (windowWidth <= 1024) {
       ServicesBottomCard.classList.add("hidden");
     } else {
       ServicesBottomCard.classList.remove("hidden");
     }
   });
-  ShowMoreBtnService.addEventListener("click", function(){
-    ServicesBottomCard.classList.toggle("hidden")
-  })
+  ShowMoreBtnService.addEventListener("click", function () {
+    ServicesBottomCard.classList.toggle("hidden");
+  });
 });
 
-document.addEventListener("DOMContentLoaded", function(){
+
+
+document.addEventListener("DOMContentLoaded", function () {
   const NavbarWrapper = document.querySelector("header");
-  let previousScroll = 0; 
+  let previousScroll = 0;
 
-window.addEventListener("scroll", function () {
-  const currentScroll = window.scrollY; 
+  window.addEventListener("scroll", function () {
+    const currentScroll = window.scrollY;
 
-  if (currentScroll > previousScroll) {
-    NavbarWrapper.classList.add("scroll-down");
-    NavbarWrapper.classList.remove("scroll-up");
-  } else {
-    NavbarWrapper.classList.add("scroll-up");
-    NavbarWrapper.classList.remove("scroll-down");
-  }
+    if (currentScroll > previousScroll) {
+      NavbarWrapper.classList.add("scroll-down");
+      NavbarWrapper.classList.remove("scroll-up");
+    } else {
+      NavbarWrapper.classList.add("scroll-up");
+      NavbarWrapper.classList.remove("scroll-down");
+    }
 
-  previousScroll = currentScroll;
+    previousScroll = currentScroll;
+  });
 });
-})

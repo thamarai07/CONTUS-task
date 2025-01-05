@@ -9,9 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let navbarParentLiMobileMenu = document.querySelector(
     ".navbar_parent_li--mobilemenu"
   );
-  let NavbarParentLiMobilemenuActiveUlLi = document.querySelectorAll(
-    ".navbar_parent_li--mobilemenu.active ul .navbar_parent_li"
-  );
 
   let isHoveredProducts = false;
   let isHoveredServices = false;
@@ -87,29 +84,70 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-    let currentIndex = 0;
-    const caseStudies = document.querySelectorAll(".casestudies_bottom--wrapper--left");
-    const totalItems = caseStudies.length;
-    
-    const backgroundImages = [
-      './assets/case-studies/bg.png',
-      './assets/case-studies/bg.png',
-    ];
-    
-    function updateCarousel() {
-      caseStudies.forEach((item, index) => {
-        item.style.display = index === currentIndex ? "block" : "none"; 
-      });
-    
-      document.querySelector('.casestudies_wrapper').style.backgroundImage = `url(${backgroundImages[currentIndex]})`;
-    
-      document.querySelector(".carousel-index").textContent = `${currentIndex + 1} / ${totalItems}`;
-    }
-    
-    setInterval(() => {
-      currentIndex = (currentIndex + 1) % totalItems;
-      updateCarousel();
-    }, 6000);
-    
+  // carousel
+  let currentIndex = 0;
+  const caseStudies = document.querySelectorAll(
+    ".casestudies_bottom--wrapper--left"
+  );
+  const totalItems = caseStudies.length;
+
+  const backgroundImages = [
+    "./assets/case-studies/bg.png",
+    "./assets/case-studies/bg.png",
+  ];
+
+  function updateCarousel() {
+    caseStudies.forEach((item, index) => {
+      item.style.display = index === currentIndex ? "block" : "none";
+    });
+
+    document.querySelector(
+      ".casestudies_wrapper"
+    ).style.backgroundImage = `url(${backgroundImages[currentIndex]})`;
+
+    document.querySelector(".carousel-index").textContent = `${
+      currentIndex + 1
+    } / ${totalItems}`;
+  }
+
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % totalItems;
     updateCarousel();
+  }, 6000);
+
+  updateCarousel();
+
+  const ServicesBottomCard = document.querySelector(".services_bottom--card");
+  const ShowMoreBtnService = document.querySelector(".showmore_btn--service");
+
+  window.addEventListener("resize", function () {
+    const windowWidth = window.innerWidth; // Get the updated window width
+    if (windowWidth <= 1024) {
+      ServicesBottomCard.classList.add("hidden");
+    } else {
+      ServicesBottomCard.classList.remove("hidden");
+    }
+  });
+  ShowMoreBtnService.addEventListener("click", function(){
+    ServicesBottomCard.classList.toggle("hidden")
+  })
 });
+
+document.addEventListener("DOMContentLoaded", function(){
+  const NavbarWrapper = document.querySelector("header");
+  let previousScroll = 0; 
+
+window.addEventListener("scroll", function () {
+  const currentScroll = window.scrollY; 
+
+  if (currentScroll > previousScroll) {
+    NavbarWrapper.classList.add("scroll-down");
+    NavbarWrapper.classList.remove("scroll-up");
+  } else {
+    NavbarWrapper.classList.add("scroll-up");
+    NavbarWrapper.classList.remove("scroll-down");
+  }
+
+  previousScroll = currentScroll;
+});
+})
